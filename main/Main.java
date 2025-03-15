@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author bw // 15.03.2025 23:35 ~
+ * @author bw // 15.03.2025 23:35 ~ 16.03.2025 01:41
  */
 public class Main {
     public static void main(String[] args) {
