@@ -4,7 +4,7 @@
     +Contrast = maxPixelIntensity - minPixelIntensity
 
     +Contrasti bulduktan sonra kontrast katsayisi = F cikartmak gerekli
-    +F = (259x(C+255)) / (255x(259-C))  -->kullanici buradaki C degerini girmelidir
+    +F = (259x(C+255)) / (255x(259-C))  -->kullanici buradaki C degerini girebilmelidir
     
     +tum pixelleri gezecegiz kontrast katsayisi ile pixelleri tekrardan degerlendirecegiz
     +I'= F x (I-128) + 128
