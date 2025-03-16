@@ -23,17 +23,11 @@ public abstract class ReadWrite{
     
     //zaten abstract instance uretilemez
     public ReadWrite(String imagePath) {
-        if(imagePath.equals("")){
-            
-        }
-        else{
-            
             imageReader = new Reader(imagePath);
             image = imageReader.getReadedImage();
         
             imageWriter = new Writer(image);
             panel = imageWriter.getWritedPanel();
-        }
     }
     
     protected BufferedImage getReadedImage(){

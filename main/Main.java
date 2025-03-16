@@ -7,6 +7,7 @@ package main;
 import guiOperations.pointOperation.Brightness;
 import guiOperations.pointOperation.Contrast;
 import guiOperations.pointOperation.GammaCorrection;
+import guiOperations.pointOperation.Threshold;
 
 import guiOperations.rw.ReadWrite;
 import guiOperations.rw.Reader;
@@ -29,7 +30,7 @@ public class Main {
         
         
 //ORIGINAL IMAGE WINDOW
-        Reader imageReader = new Reader(imagePathTEST_GAMMA);
+        Reader imageReader = new Reader(imagePathTEST_GAMMA_2);
         
         BufferedImage image = imageReader.getReadedImage();
         
@@ -62,12 +63,13 @@ public class Main {
 //        JPanel panel = gammaCorrectionOperation.getWritedPanel();
 
 
+//THRESHOLD POINT OPERATION:
+     
+        Threshold thresholdOperation = new Threshold(imagePathTEST_GAMMA_2, 140, 255, Threshold.setModeGrayscale());
+        thresholdOperation.applyPointOperation(false);
+        JPanel panel = thresholdOperation.getWritedPanel();
 
-
-
-
-
-        //Window window_after_operation = new Window(640, 480, "Image Processing Library Testing | AFTER IMAGE", panel);
+        Window window_after_operation = new Window(640, 480, "Image Processing Library Testing | AFTER IMAGE", panel);
     
     
         

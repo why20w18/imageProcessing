@@ -31,11 +31,11 @@ public class GammaCorrection extends ReadWrite{
     private GAMMA_MODE mode_en_de_code;
     
 
-   public static GAMMA_MODE gammaEncoding(){
+   public static GAMMA_MODE setModeEncoding(){
        return GAMMA_MODE.GAMMA_ENCODING;
    }
    
-   public static GAMMA_MODE gammaDecoding(){
+   public static GAMMA_MODE setModeDecoding(){
        return GAMMA_MODE.GAMMA_DECODING;
    }
 
@@ -65,7 +65,7 @@ public class GammaCorrection extends ReadWrite{
     //      ENCODING:
     //      I' = 255 x((I/255)^(GamaValue))
     //      (sRGB) GamaValue = 2.2
-    public void applyGammaCorrection(double gammaValue , boolean isLogOpen,GAMMA_MODE mode_en_de_code){
+    private void applyGammaCorrection(double gammaValue , boolean isLogOpen,GAMMA_MODE mode_en_de_code){
         for(int i = 0 ; i < image.getWidth() ; i++){
             for(int j = 0 ; j < image.getHeight() ; j++){
                 
