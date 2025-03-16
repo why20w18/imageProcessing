@@ -9,6 +9,7 @@ package guiOperations.pointOperation;
 
 import guiOperations.rw.ReadWrite;
 import java.awt.Color;
+import javax.swing.JPanel;
 
 /**
  *
@@ -24,6 +25,8 @@ public class Threshold extends ReadWrite{
     private int threshold;
     private int maxVal;
     private IMAGE_MODE mode_gray_srgb;
+ 
+    
     
     public Threshold(String imagePath,int threshold , int maxVal,IMAGE_MODE mode_gray_srgb) {
         super(imagePath);

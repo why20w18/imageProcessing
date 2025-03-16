@@ -17,6 +17,9 @@ import javax.swing.JPanel;
 public interface WriteFace {
     
     public abstract void writePanel(BufferedImage image);
+    public abstract void writePanel(BufferedImage image,ChainPanel chain_panel);
+   
     public abstract JPanel getWritedPanel();
+    
     
 }

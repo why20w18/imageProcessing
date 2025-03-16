@@ -7,6 +7,7 @@
  */
 package guiOperations.pointOperation;
 
+import guiOperations.ChainPanel;
 import guiOperations.rw.ReadWrite;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -18,9 +19,15 @@ import javax.swing.JPanel;
 public class Brightness extends ReadWrite{
     private int brightnessAmount;
     
+
     
     public Brightness(String imagePath , int brightnessAmount) {
         super(imagePath);
+        this.brightnessAmount = brightnessAmount;
+    }
+    
+    public Brightness(String imagePath , int brightnessAmount , ChainPanel chain_panel){
+        super(imagePath,chain_panel);
         this.brightnessAmount = brightnessAmount;
     }
 
@@ -29,7 +36,7 @@ public class Brightness extends ReadWrite{
         
       for(int i = 0 ; i < image.getWidth() ; i++){
             for(int j = 0 ; j < image.getHeight() ; j++){
-                Color c = new Color(image.getRGB(j, i)); //soldan saga
+                Color c = new Color(image.getRGB(i, j)); //soldan saga
 
                 /*
                 algoritma:
@@ -47,7 +54,7 @@ public class Brightness extends ReadWrite{
                 
                 
                 Color brightColor = new Color(currentRedPixel,currentGreenPixel,currentBluePixel);
-                image.setRGB(j, i, brightColor.getRGB());
+                image.setRGB(i, j, brightColor.getRGB());
                 
                 if(isLogOpen)
                 System.out.println("red = " + currentRedPixel + " | green = " + currentGreenPixel + " | blue = " + currentGreenPixel);

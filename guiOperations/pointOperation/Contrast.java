@@ -13,8 +13,10 @@
 */
 package guiOperations.pointOperation;
 
+import guiOperations.ChainPanel;
 import guiOperations.rw.ReadWrite;
 import java.awt.Color;
+import javax.swing.JPanel;
 
 /**
  *
@@ -22,6 +24,12 @@ import java.awt.Color;
  */
 public class Contrast extends ReadWrite{
     private int contrastFactor;
+    
+     public Contrast(String imagePath , int contrastMax,ChainPanel chain_Panel) {
+        super(imagePath,chain_Panel);
+        this.contrastFactor = getContrastFactor(contrastMax);
+    }
+
     
     //max degeri biz veririz ve buna gore hesaplama yapilir
     public Contrast(String imagePath , int contrastMax) {
@@ -44,7 +52,7 @@ public class Contrast extends ReadWrite{
     public void applyPointOperation(boolean isLogOpen){
         for(int i = 0 ; i < image.getWidth() ; i++){
             for(int j = 0 ; j < image.getHeight() ; j++){
-                Color c = new Color(image.getRGB(j, i));
+                Color c = new Color(image.getRGB(i, j));
                 
                 //contrastFactore gore yeni pixellerin degerini hesapladik
                 int newRedPixel = setScaleRange((contrastFactor*(c.getRed()-128)) +128, 0, 255);
@@ -53,7 +61,7 @@ public class Contrast extends ReadWrite{
                 
                 //yeni pikseli eski pikselin yerine set etmemiz gerekir biz color olarak cektiysek color olarak set ederiz
                 Color newContrastColor = new Color(newRedPixel, newGreenPixel, newBluePixel);
-                image.setRGB(j,i,newContrastColor.getRGB());                
+                image.setRGB(i,j,newContrastColor.getRGB());                
             }
         }
 

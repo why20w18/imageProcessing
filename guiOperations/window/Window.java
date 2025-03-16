@@ -31,6 +31,8 @@ public class Window {
         this.height = height;
         ////////////
         window.add(panel);
+        window.revalidate();
+        window.repaint();
         window.setVisible(true);
     }
 }
