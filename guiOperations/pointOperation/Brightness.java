@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 public class Brightness extends ReadWrite{
     private int brightnessAmount;
     
+    
     public Brightness(String imagePath , int brightnessAmount) {
         super(imagePath);
         this.brightnessAmount = brightnessAmount;
@@ -40,9 +41,9 @@ public class Brightness extends ReadWrite{
                 
                 */
                 
-                int currentBluePixel = Math.min(255,Math.max(0,c.getBlue()+brightnessAmount));
-                int currentRedPixel = Math.min(255,Math.max(0,c.getRed()+brightnessAmount));
-                int currentGreenPixel = Math.min(255,Math.max(0,c.getGreen()+brightnessAmount));
+                int currentBluePixel = setScaleRange(c.getBlue()+brightnessAmount, 0, 255);
+                int currentRedPixel = setScaleRange(c.getRed()+brightnessAmount, 0, 255);
+                int currentGreenPixel = setScaleRange(c.getGreen()+brightnessAmount, 0, 255);
                 
                 
                 Color brightColor = new Color(currentRedPixel,currentGreenPixel,currentBluePixel);

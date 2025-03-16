@@ -1,6 +1,7 @@
 /*
     BEKLENEN ISLEVLER:
-    ilerleyen surecte burada okuma modlari eklenebilir
+    +ilerleyen surecte burada okuma modlari eklenebilir
+    {enum icersinde,enum abstract class icinde gomulu sekilde}
 
  */
 package guiOperations.rw;
@@ -20,15 +21,22 @@ public abstract class ReadWrite{
     private JPanel panel;
     protected BufferedImage image;
     
+    //zaten abstract instance uretilemez
     public ReadWrite(String imagePath) {
-        imageReader = new Reader(imagePath);
-        image = imageReader.getReadedImage();
+        if(imagePath.equals("")){
+            
+        }
+        else{
+            
+            imageReader = new Reader(imagePath);
+            image = imageReader.getReadedImage();
         
-        imageWriter = new Writer(image);
-        panel = imageWriter.getWritedPanel();
+            imageWriter = new Writer(image);
+            panel = imageWriter.getWritedPanel();
+        }
     }
     
-    public BufferedImage getReadedImage(){
+    protected BufferedImage getReadedImage(){
         return this.image;
     }
   
@@ -36,8 +44,12 @@ public abstract class ReadWrite{
         return this.panel;
     }
     
+    public int setScaleRange(int currentPixelValue , int minRange , int maxRange){
+        return Math.min(maxRange, Math.max(minRange, currentPixelValue));
+    }
+    
     //ilerleyen surecte burada okuma modlari eklenebilir
-    public abstract void applyPointOperation(boolean isLogOpen);
+    protected abstract void applyPointOperation(boolean isLogOpen);
     
     
     

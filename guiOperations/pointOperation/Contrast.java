@@ -92,8 +92,6 @@ public class Contrast extends ReadWrite{
         return contrastFactor;
     }
     
-    public int setScaleRange(int currentPixelValue , int minRange , int maxRange){
-        return Math.min(255, Math.max(0, currentPixelValue));
-    }
+  
     
 }
