@@ -7,7 +7,6 @@
  */
 package guiOperations.pointOperation;
 
-import guiOperations.ChainPanel;
 import guiOperations.rw.ReadWrite;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -26,11 +25,7 @@ public class Brightness extends ReadWrite{
         this.brightnessAmount = brightnessAmount;
     }
     
-    public Brightness(String imagePath , int brightnessAmount , ChainPanel chain_panel){
-        super(imagePath,chain_panel);
-        this.brightnessAmount = brightnessAmount;
-    }
-
+   
     @Override
     public void applyPointOperation(boolean isLogOpen) {
         

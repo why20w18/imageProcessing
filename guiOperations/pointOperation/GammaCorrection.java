@@ -13,7 +13,6 @@ Corrected = 255 * (Image/255).^(1/2.2)  => g=0.1 icin koyu tonlar artar   //DECO
 */
 package guiOperations.pointOperation;
 
-import guiOperations.ChainPanel;
 import guiOperations.rw.ReadWrite;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -42,13 +41,7 @@ public class GammaCorrection extends ReadWrite{
    }
    
    
-    public GammaCorrection(String imagePath , double gamma , GAMMA_MODE mode_en_de_code,ChainPanel chainPanel) {
-        super(imagePath,chainPanel);
-        this.gamma = gamma;
-        this.mode_en_de_code = mode_en_de_code;
-    
-    }
-
+ 
 
     
     public GammaCorrection(String imagePath , double gamma , GAMMA_MODE mode_en_de_code) {

@@ -4,10 +4,11 @@
 */
 package main;
 
-import guiOperations.ChainPanel;
 import guiOperations.pointOperation.Brightness;
 import guiOperations.pointOperation.Contrast;
 import guiOperations.pointOperation.GammaCorrection;
+import guiOperations.pointOperation.Histogram;
+import guiOperations.pointOperation.HistogramEqualization;
 import guiOperations.pointOperation.Threshold;
 
 import guiOperations.rw.ReadWrite;
@@ -76,39 +77,23 @@ public class Main {
 //        Threshold thresholdOperation = new Threshold(imagePathTEST_GAMMA_2, 140, 255, Threshold.setModeSRGB());
 //        thresholdOperation.applyPointOperation(false);
 //        JPanel panel = thresholdOperation.getWritedPanel();
-
-
-
+//
+//
+//
 //        Window window_after_operation = new Window(640, 480, "Image Processing Library Testing | AFTER IMAGE", panel);
-
-
-
-
-
-////////BIRBIRINE BAGLAYARAK ISLEMLERE GIRME///////
-/*
-        ChainPanel chain_panel = new ChainPanel();
-        GammaCorrection gammaCorrectionOperation = new GammaCorrection(imagePathTEST_GAMMA_2,10,GammaCorrection.setModeDecoding(),chain_panel);
-        gammaCorrectionOperation.applyPointOperation(false);
-        chain_panel.setPanel(gammaCorrectionOperation.getWritedPanel());
-        Window window_after_operation_1 = new Window(640, 480, "Image Processing Library Testing | AFTERGAMA-1 IMAGE", chain_panel.getPanel());
-
         
-        
-        Contrast contrastOperation = new Contrast(chain_panel.getImagePath(), 200, chain_panel);
-        contrastOperation.applyPointOperation(false);
-        chain_panel.setPanel(contrastOperation.getWritedPanel());
-        Window window_after_operation_2 = new Window(640, 480, "Image Processing Library Testing | AFTERCONTRAST-2 IMAGE", chain_panel.getPanel());
-
-        
-        
-        Brightness brightnessOperation = new Brightness(chain_panel.getImagePath(), 0, chain_panel);
-        brightnessOperation.applyPointOperation(false);
-        chain_panel.setPanel(brightnessOperation.getWritedPanel());
-        Window window_after_operation_3 = new Window(640, 480, "Image Processing Library Testing | AFTERBRIHT-3 IMAGE", chain_panel.getPanel());
-        */
+//        Histogram histogramOperation = new Histogram(imagePathJPEG, Histogram.setModeSRGB());
+//        histogramOperation.applyPointOperation(false);
+//        histogramOperation.infoHistogram();
+//        histogramOperation.writeHistogramGraphics();
+//        JPanel panel = histogramOperation.getWritedPanel();
 
 
+        HistogramEqualization histogramEqualizationOperation = new HistogramEqualization(imagePathTEST_GAMMA_2,HistogramEqualization.setModeBasic(10, 25, 10));
+        histogramEqualizationOperation.applyPointOperation(false);
+        JPanel panel4 = histogramEqualizationOperation.getWritedPanel();
+
+        Window window_after_operation = new Window(640, 480, "Image Processing Library Testing | AFTER IMAGE", panel4);
         
     }
 }

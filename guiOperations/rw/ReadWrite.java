@@ -6,9 +6,9 @@
  */
 package guiOperations.rw;
 
-import guiOperations.ChainPanel;
 import guiOperations.ReadFace;
 import guiOperations.WriteFace;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
@@ -21,7 +21,6 @@ public abstract class ReadWrite{
     private Writer imageWriter;
     private JPanel panel;
     protected BufferedImage image;
-    
     //zaten abstract instance uretilemez
     public ReadWrite(String imagePath) {
             imageReader = new Reader(imagePath);
@@ -31,35 +30,34 @@ public abstract class ReadWrite{
             panel = imageWriter.getWritedPanel();
     }
     
-    public ReadWrite(String imagePath,ChainPanel chainPanel) {
-            chainPanel.setImagePath(imagePath);
-            
-            imageReader = new Reader(imagePath);
-            chainPanel.setImage(imageReader.getReadedImage());
-            imageWriter = new Writer(chainPanel.getImage(),chainPanel); //chain panel parametresi olmazsa 3 tane fotograafi en bastan isliyor
-            chainPanel.setPanel(imageWriter.getWritedPanel());
-            
-            image = chainPanel.getImage();
-            panel = chainPanel.getPanel();
 
     
-    }
-    
-    
-    protected BufferedImage getReadedImage(){
+    public BufferedImage getReadedImage(){
         return this.image;
     }
   
     public JPanel getWritedPanel(){
         return this.panel;
     }
+  
     
     public int setScaleRange(int currentPixelValue , int minRange , int maxRange){
         return Math.min(maxRange, Math.max(minRange, currentPixelValue));
     }
     
+     protected void clearImage(){
+        Color newColor = new Color(255,255,255);
+        
+        for(int i = 0 ; i < image.getWidth() ; i++){
+            for(int j = 0 ; j < image.getHeight() ; j++){
+                this.image.setRGB(i, j, newColor.getRGB());
+                
+            }
+        }
+    }
+    
     //ilerleyen surecte burada okuma modlari eklenebilir
-    protected abstract void applyPointOperation(boolean isLogOpen);
+    public abstract void applyPointOperation(boolean isLogOpen);
     
     
     

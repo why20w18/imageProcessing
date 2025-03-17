@@ -13,7 +13,6 @@
 */
 package guiOperations.pointOperation;
 
-import guiOperations.ChainPanel;
 import guiOperations.rw.ReadWrite;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -24,11 +23,7 @@ import javax.swing.JPanel;
  */
 public class Contrast extends ReadWrite{
     private int contrastFactor;
-    
-     public Contrast(String imagePath , int contrastMax,ChainPanel chain_Panel) {
-        super(imagePath,chain_Panel);
-        this.contrastFactor = getContrastFactor(contrastMax);
-    }
+ 
 
     
     //max degeri biz veririz ve buna gore hesaplama yapilir
