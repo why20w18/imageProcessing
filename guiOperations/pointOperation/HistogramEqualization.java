@@ -59,6 +59,10 @@ public class HistogramEqualization extends ReadWrite{
     }
     
     public static HIST_EQUAL_MODE setModeBasic(int R , int G , int B){
+        if(R < 0) R = Math.abs(R);
+        if(G < 0) G = Math.abs(G);
+        if(B < 0) B = Math.abs(B);
+        
         basicR = R;
         basicG = G;
         basicB = B;
@@ -68,8 +72,8 @@ public class HistogramEqualization extends ReadWrite{
 
     @Override
     public void applyPointOperation(boolean isLogOpen) {
-         calculateHistogram();
-         calculateEqualization(this.mode_normalized_basic);
+        calculateHistogram();
+        calculateEqualization(this.mode_normalized_basic);
         applyHistogramEqualization(isLogOpen);     
     }
     
@@ -93,20 +97,28 @@ public class HistogramEqualization extends ReadWrite{
     
     
     
-    
-    private int[] getCDF(int histogram[]){
-        int cdf[] = new int[256];
+    //burada CDF hesaplamak icin her kanali tek tek aliyoruz
+    private double [] getCDF(int histogram[]){
+        double cdf[] = new double[256];
+        double prob[] = new double[256];
         
-        cdf[0] = histogram[0];
+        for(int i = 0 ; i < 256 ; i++){
+            prob[i] = (double)histogram[i] / totalPixel;
+          //  if(i % 30 == 0)
+          //        System.out.println(prob[i]);
+        }
+                
+        
+        cdf[0] = prob[0];
         for(int i = 1 ; i < 256 ; i++){
-            cdf[i] = cdf[i-1] + histogram[i];
+            cdf[i] = cdf[i-1] + prob[i];
         }
         
         return cdf;
     }
     
-    private int getMin(int arr[]){
-        int result = arr[0];
+    private double getMin(double arr[]){
+        double result = arr[0];
         for(int i = 0 ; i < arr.length ; i++){
             if(result > arr[i])
                 result = arr[i];
@@ -116,27 +128,27 @@ public class HistogramEqualization extends ReadWrite{
     
     private void calculateEqualization(HIST_EQUAL_MODE mode_normalized_basic){
         //tum kanallarin cdfleri hesaplandi
-        int redCDF[] = getCDF(redHistogram);
-        int greenCDF[] = getCDF(greenHistogram);
-        int blueCDF[] = getCDF(blueHistogram);
+        double redCDF[] = getCDF(redHistogram);
+        double greenCDF[] = getCDF(greenHistogram);
+        double blueCDF[] = getCDF(blueHistogram);
         
         //NORMALIZASYON
         if(mode_normalized_basic == HIST_EQUAL_MODE.NORMALIZED){
-            int redMin = getMin(redCDF);
-            int greenMin = getMin(greenCDF);
-            int blueMin = getMin(blueCDF);
+            double redMin = getMin(redCDF);
+            double greenMin = getMin(greenCDF);
+            double blueMin = getMin(blueCDF);
             
             for(int i = 0 ; i < 256 ; i++){
-                redEqualization[i] = setScaleRange((int)(((double)(redCDF[i] - redMin))/(totalPixel-redMin) *255), 0, 255);
-                greenEqualization[i] = setScaleRange( (int)(((double)(greenCDF[i] - greenMin))/(totalPixel-greenMin) *255), 0, 255);
-                blueEqualization[i] = setScaleRange((int)(((double)(blueCDF[i] - blueMin))/(totalPixel-blueMin) *255), 0, 255);
+                redEqualization[i] = setScaleRange((int)(((redCDF[i] - redMin))/(totalPixel-redMin) *255), 0, 255);
+                greenEqualization[i] = setScaleRange( (int)(((greenCDF[i] - greenMin))/(totalPixel-greenMin) *255), 0, 255);
+                blueEqualization[i] = setScaleRange((int)(((blueCDF[i] - blueMin))/(totalPixel-blueMin) *255), 0, 255);
             }
         }
         else if(mode_normalized_basic == HIST_EQUAL_MODE.BASIC){
             for(int i = 0 ; i < 256 ; i++){
-                redEqualization[i] = setScaleRange( ((int)((double)(redCDF[i] * 255))/redCDF[255-basicR]), 0, 255);
-                greenEqualization[i] = setScaleRange(((int)((double)(greenCDF[i] * 255))/greenCDF[255-basicG]), 0, 255);
-                blueEqualization[i] = setScaleRange(((int)((double)(blueCDF[i] * 255))/blueCDF[255-basicB]), 0, 255);
+                redEqualization[i] = setScaleRange((int) (((redCDF[i] * 255))/redCDF[255-basicR]), 0, 255);
+                greenEqualization[i] = setScaleRange((int) (((greenCDF[i] * 255))/greenCDF[255-basicG]), 0, 255);
+                blueEqualization[i] = setScaleRange((int) (((blueCDF[i] * 255))/blueCDF[255-basicB]), 0, 255);
             }
         }
     }

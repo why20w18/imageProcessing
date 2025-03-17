@@ -36,11 +36,11 @@ public class Threshold extends ReadWrite{
         
     }
     
-    public static IMAGE_MODE setModeSRGB(){
+    public static IMAGE_MODE setThresholdModeSRGB(){
         return IMAGE_MODE.IMAGE_SRGB;
     }
     
-    public static IMAGE_MODE setModeGrayscale(){
+    public static IMAGE_MODE setThresholdModeGrayscale(){
         return IMAGE_MODE.IMAGE_GRAYSCALE;
     }
     

@@ -46,11 +46,11 @@ public class Histogram extends ReadWrite{
         }   
     }
     
-    public static MODE_HISTOGRAM setModeSRGB(){
+    public static MODE_HISTOGRAM setHistogramModeRGB(){
         return MODE_HISTOGRAM.SRGB;
     }
 
-    public static MODE_HISTOGRAM setModeGrayscale(){
+    public static MODE_HISTOGRAM setHistogramModeGrayscale(){
         return MODE_HISTOGRAM.GRAYSCALE;
     }
     
